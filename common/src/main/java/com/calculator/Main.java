@@ -9,8 +9,8 @@ import java.util.Scanner;
 public class Main {
     public static void main( String[] args )
     {
-        File pluginsDir = new File("C:\\Users\\mateu\\Desktop\\TO_lab\\plugins");
-        File plugins = new File("C:\\Users\\mateu\\Desktop\\TO_lab\\plugins\\com\\calculator");
+        File pluginsDir = new File(".\\plugins");
+        File plugins = new File(".\\plugins\\com\\calculator");
         String[] files = plugins.list();
 
         Calc calc = new Calc();
