@@ -105,7 +105,7 @@ public class Calc implements ICalc {
         return Double.parseDouble(numbers.get(0));
     }
 
-    public void setOperationMapMap(String sign , Object operation) {
+    public void setOperationMap(String sign , Object operation) {
         operationsMap.put(sign, operation);
     }
 
