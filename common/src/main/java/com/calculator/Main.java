@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Scanner;
 
 public class Main {
     public static void main( String[] args )
@@ -12,14 +13,14 @@ public class Main {
         File plugins = new File("C:\\Users\\mateu\\Desktop\\TO_lab\\plugins\\com\\calculator");
         String[] files = plugins.list();
 
-        ICalc calc = new Calc();
+        Calc calc = new Calc();
 
         if (files.length != 0) {
             try {
                 URL loadPath = pluginsDir.toURI().toURL();
                 URL[] classUrl = new URL[]{loadPath};
                 ClassLoader cl = new URLClassLoader(classUrl);
-                System.out.print("Załadowane pluginy: ");
+                System.out.print("Plugins loaded: ");
                 for (String file : files) {
                     System.out.print(file + ", ");
                     Class loadedClass = cl.loadClass("com.calculator." + file.replace(".class", ""));
@@ -30,8 +31,24 @@ public class Main {
                     calc.setOperationMap(plugin.getOperator(), plugin);
                 }
 
-                calc.solve("((4 + 5) / 3)^2");
+                System.out.println();
 
+                calc.solve("((12 - 2&9) / 3)^2");
+
+                /*
+                Scanner scan = new Scanner(System.in);
+                System.out.print("Enter your expression (q - to quit): ");
+
+                while(scan.hasNextLine()) {
+                    String s = scan.nextLine();
+                    if(s.equals("q")) {
+                        System.exit(0);
+                    } else {
+                        calc.solve(s);
+                    }
+                    System.out.print("Enter your expression (q - to quit): ");
+                }
+                */
             } catch (MalformedURLException | ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
