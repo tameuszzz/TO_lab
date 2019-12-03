@@ -87,11 +87,7 @@ public class Calc implements ICalc {
             if(numbers.get(i).matches("["+allOperators.toString()+"]")) {
                 try {
                     numbers.add(i + 1, operationsMap.get(numbers.get(i)).getClass().getMethod("compute", double.class, double.class).invoke(operationsMap.get(numbers.get(i)), Double.parseDouble(numbers.get(i - 2)), Double.parseDouble(numbers.get(i - 1))).toString());
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                } catch (NoSuchMethodException e) {
+                } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
                     e.printStackTrace();
                 }
                 for (int j = 0; j < 3; j++) {

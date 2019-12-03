@@ -4,6 +4,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.EmptyStackException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,11 +16,12 @@ public class Main {
 
         Calc calc = new Calc();
 
-        if (files.length != 0) {
+        if (files != null && files.length != 0) {
             try {
                 URL loadPath = pluginsDir.toURI().toURL();
                 URL[] classUrl = new URL[]{loadPath};
                 ClassLoader cl = new URLClassLoader(classUrl);
+
                 System.out.print("Plugins loaded: ");
                 for (String file : files) {
                     System.out.print(file + ", ");
@@ -35,7 +37,6 @@ public class Main {
 
                 calc.solve("((12 - 2&9) / 3)^2");
 
-                /*
                 Scanner scan = new Scanner(System.in);
                 System.out.print("Enter your expression (q - to quit): ");
 
@@ -46,15 +47,14 @@ public class Main {
                     } else {
                         calc.solve(s);
                     }
-                    System.out.print("Enter your expression (q - to quit): ");
+                    System.out.print("Enter the expression (q - to exit): ");
                 }
-                */
-            } catch (MalformedURLException | ClassNotFoundException e) {
+
+            } catch (MalformedURLException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
                 e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
+
+            } catch (NumberFormatException | EmptyStackException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("Invalid input");
             }
         }
     }
