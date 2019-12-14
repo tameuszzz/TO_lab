@@ -24,7 +24,7 @@ public class Calc implements ICalc {
         operatorsMap.put(")", -1);
     }
 
-    public double solve(String expression) {
+    public double solve(String expression) throws NoSuchMethodException, IllegalAccessException{
         Stack<String> operators = new Stack<>();
         List<String> numbers = new ArrayList<>();
 
@@ -62,12 +62,20 @@ public class Calc implements ICalc {
                     {
                         numbers.add(operators.pop());
                     }
-                    operators.pop();
+                    if(!operators.isEmpty() && !operators.peek().contains("(")) {
+                        throw new NumberFormatException("Invalid input");
+                    }
+                    else {
+                        operators.pop();
+                    }
                 }
                 else
                 {
                     while (!operators.isEmpty() && operatorsMap.get(a) <= operatorsMap.get(operators.peek()))
                     {
+                        if (operators.peek().contains("(")) {
+                            throw new NumberFormatException("Invalid input");
+                        }
                         numbers.add(operators.pop());
                     }
                     operators.push(a);
@@ -77,6 +85,9 @@ public class Calc implements ICalc {
 
         while (!operators.isEmpty())
         {
+            if (operators.peek().contains("(")) {
+                throw new NumberFormatException("Invalid input");
+            }
             numbers.add(operators.pop());
         }
 
@@ -97,7 +108,6 @@ public class Calc implements ICalc {
             }
         }
 
-        System.out.println("Result: " + numbers.get(0));
         return Double.parseDouble(numbers.get(0));
     }
 
