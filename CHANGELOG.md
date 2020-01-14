@@ -3,6 +3,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] 2020.01.14
+
+### Added
+
+- WebApp version
+
 ## [0.4.0] 2019.12.14
 
 ### Added
