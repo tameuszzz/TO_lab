@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Calculator</title>
+</head>
+<body>
+<div class="container">
+    <h1>Calculator App</h1>
+    <h2>by Tomasz Fital & Mateusz Dusik</h2>
+    <form action="/index" method="post">
+        <label>Enter your expression:</label>
+        <input id="problem" name="problem" placeholder="0">
+        <input type="submit" value="CALCULATE">
+        <div th:if="${result} != null">
+            <p th:text= "'Result: ' + ${result}"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>
